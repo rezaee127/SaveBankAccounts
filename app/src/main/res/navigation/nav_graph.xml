@@ -8,21 +8,21 @@
     <fragment
         android:id="@+id/profileFragment"
         android:name="com.example.hw13.ui.ProfileFragment"
-        android:label="fragment_profile"
+        android:label="Profile"
         tools:layout="@layout/fragment_profile" />
     <fragment
         android:id="@+id/createAccountFragment"
         android:name="com.example.hw13.ui.CreateAccountFragment"
-        android:label="fragment_create_account"
+        android:label="Create Account"
         tools:layout="@layout/fragment_create_account" />
     <fragment
         android:id="@+id/selectAccountFragment"
         android:name="com.example.hw13.ui.SelectAccountFragment"
-        android:label="fragment_select_account"
+        android:label="Select Account"
         tools:layout="@layout/fragment_select_account" />
     <fragment
         android:id="@+id/showAccountFragment"
         android:name="com.example.hw13.ui.ShowAccountFragment"
-        android:label="fragment_show_account"
+        android:label="Show Account"
         tools:layout="@layout/fragment_show_account" />
 </navigation>
