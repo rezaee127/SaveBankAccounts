@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:title="@string/profile"
+        android:id="@+id/profileFragment"/>
+    <item android:title="Create Accounts"
+        android:id="@+id/createAccountFragment"/>
+    <item android:title="Show Accounts"
+        android:id="@+id/showAccountFragment"/>
+    <item android:title="Select Account"
+        android:id="@+id/selectAccountFragment"/>
+    <item android:title="delete all" />
+</menu>
