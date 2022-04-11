@@ -3,8 +3,79 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.ProfileFragment">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_margin="15dp">
+
+
+    <EditText
+        android:id="@+id/editTextFirstName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:ems="10"
+        android:hint="نام"
+        android:inputType="textPersonName"
+        tools:ignore="TouchTargetSizeCheck,TouchTargetSizeCheck" />
+
+    <EditText
+        android:id="@+id/editTextLastName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:ems="10"
+        android:gravity="start"
+        android:hint="نام خانوادگی"
+        android:inputType="textCapWords"
+        tools:ignore="TouchTargetSizeCheck,TouchTargetSizeCheck" />
 
 
 
+        <EditText
+            android:id="@+id/edit_text_father_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:ems="10"
+            android:gravity="start"
+            android:hint="نام پدر"
+            android:inputType="textCapWords"
+            tools:ignore="TouchTargetSizeCheck,TouchTargetSizeCheck" />
+
+
+
+        <EditText
+        android:id="@+id/editTextPostCode"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:ems="10"
+        android:hint="کد پستی "
+        android:inputType="number"
+        tools:ignore="TouchTargetSizeCheck,TouchTargetSizeCheck" />
+
+        <EditText
+            android:id="@+id/editTextPhone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:ems="10"
+            android:hint="شماره تلفن"
+            android:inputType="number"
+            tools:ignore="TouchTargetSizeCheck,TouchTargetSizeCheck" />
+
+        <com.google.android.material.button.MaterialButton
+        android:id="@+id/buttonRegister"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cornerRadius="30dp"
+        android:minHeight="50dp"
+        android:layout_marginVertical="30dp"
+        android:text="ثبت اطلاعات" />
+
+    </LinearLayout>
 </ScrollView>
