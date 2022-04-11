@@ -28,7 +28,8 @@ class MainActivity : AppCompatActivity() {
         navController = navHostFragment.navController
 
         appBarConfiguration = AppBarConfiguration(setOf(R.id.profileFragment,
-            R.id.createAccountFragment,R.id.selectAccountFragment,R.id.showAccountFragment), binding.drawerLayout)
+            R.id.createAccountFragment,R.id.selectAccountFragment
+            ,R.id.showAccountFragment,R.id.showProfileFragment), binding.drawerLayout)
 
         setupActionBarWithNavController(navController, appBarConfiguration)
         binding.navView.setupWithNavController(navController)

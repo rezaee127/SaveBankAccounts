@@ -31,16 +31,18 @@ class ProfileFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+       initView()
+    }
+
+    private fun initView() {
         val pref = requireActivity().getSharedPreferences("share", Context.MODE_PRIVATE)
 
         when {
             pref.getString("firstName", "").isNullOrBlank() -> register()
             Repository.editProfileInfoFlag -> edit()
+            else -> findNavController().navigate(R.id.action_profileFragment_to_showProfileFragment)
         }
     }
-
-
-
 
     private fun register(){
         val regex1 =   Regex("^[ آابپتثجچحخدذرزژسشصضطظعغفقکگلمنوهیئ]+$")
@@ -49,14 +51,23 @@ class ProfileFragment : Fragment() {
             when {
                 binding.editTextFirstName .text.isNullOrBlank() -> binding.editTextFirstName.error = "نام را وارد کنید"
                 !regex1.matches(binding.editTextFirstName.text) -> binding.editTextFirstName.error = "نام اشتباه است"
+                binding.editTextFirstName.length()<3 -> binding.editTextFirstName.error="نام اشتباه است"
+
                 binding.editTextLastName.text.isNullOrBlank() -> binding.editTextLastName.error = "نام خانوادگی را وارد کنید"
                 !regex1.matches(binding.editTextLastName.text) -> binding.editTextLastName.error = "نام خانوادگی اشتباه است"
+                binding.editTextLastName.length()<3 -> binding.editTextLastName.error="نام خانوادگی اشتباه است"
+
                 binding.editTextFatherName.text.isNullOrBlank() -> binding.editTextFatherName.error = "نام پدر را وارد کنید"
                 !regex1.matches(binding.editTextFatherName.text) -> binding.editTextFatherName.error = "نام پدر اشتباه است"
+                binding.editTextFatherName.length()<3 -> binding.editTextFatherName.error="نام پدر اشتباه است"
+
                 binding.editTextPostCode.text.isNullOrBlank() -> binding.editTextPostCode.error = "کدپستی را وارد کنید"
                 binding.editTextPostCode.length()!=10 -> binding.editTextPostCode.error="کدپستی اشتباه است"
+
                 binding.editTextPhone.text.isNullOrBlank() -> binding.editTextPhone.error = "شماره تلفن را وارد کنید"
                 binding.editTextPhone.length()!=11 -> binding.editTextPhone.error="شماره تلفن اشتباه است"
+
+                binding.editTextNumberOfAccount.text.toString().toInt() !in 1..5 -> binding.editTextNumberOfAccount.error="عدد اشتباه است"
 
                 else -> saveOnSharedPreferences()
             }
@@ -70,6 +81,7 @@ class ProfileFragment : Fragment() {
         val fatherName=binding.editTextFatherName.text.toString()
         val postCode=binding.editTextPostCode.text.toString()
         val phone=binding.editTextPhone.text.toString()
+        Repository.numberOfAccount=binding.editTextNumberOfAccount.text.toString().toInt()
 
         val pref = requireActivity().getSharedPreferences("share", Context.MODE_PRIVATE)
         val editor = pref.edit()
@@ -93,6 +105,7 @@ class ProfileFragment : Fragment() {
         binding.editTextFatherName.setText(pref.getString("fatherName",""))
         binding.editTextPostCode.setText(pref.getString("postCode",""))
         binding.editTextPhone.setText(pref.getString("phone",""))
+        binding.editTextNumberOfAccount.setText(Repository.numberOfAccount.toString())
 
         register()
     }
