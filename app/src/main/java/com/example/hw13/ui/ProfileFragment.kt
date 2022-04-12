@@ -1,5 +1,6 @@
 package com.example.hw13.ui
 
+import ProfileViewModel
 import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -7,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.hw13.R
 import com.example.hw13.databinding.FragmentProfileBinding
@@ -14,6 +16,7 @@ import com.example.hw13.repository.Repository
 
 class ProfileFragment : Fragment() {
     private lateinit var  binding : FragmentProfileBinding
+    private val vModel: ProfileViewModel by viewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -39,7 +42,7 @@ class ProfileFragment : Fragment() {
 
         when {
             pref.getString("firstName", "").isNullOrBlank() -> register()
-            Repository.editProfileInfoFlag -> edit()
+            vModel.editProfileInfoFlag -> edit()
             else -> findNavController().navigate(R.id.action_profileFragment_to_showProfileFragment)
         }
     }
@@ -65,7 +68,8 @@ class ProfileFragment : Fragment() {
                 binding.editTextPostCode.length()!=10 -> binding.editTextPostCode.error="کدپستی اشتباه است"
 
                 binding.editTextPhone.text.isNullOrBlank() -> binding.editTextPhone.error = "شماره تلفن را وارد کنید"
-                binding.editTextPhone.length()!=11 -> binding.editTextPhone.error="شماره تلفن اشتباه است"
+                binding.editTextPhone.length()!=11  -> binding.editTextPhone.error="شماره تلفن اشتباه است"
+                !binding.editTextPhone.text.toString().startsWith("0") -> binding.editTextPhone.error="شماره تلفن اشتباه است"
 
                 binding.editTextNumberOfAccount.text.toString().toInt() !in 1..5 -> binding.editTextNumberOfAccount.error="عدد اشتباه است"
 
@@ -81,7 +85,7 @@ class ProfileFragment : Fragment() {
         val fatherName=binding.editTextFatherName.text.toString()
         val postCode=binding.editTextPostCode.text.toString()
         val phone=binding.editTextPhone.text.toString()
-        Repository.numberOfAccount=binding.editTextNumberOfAccount.text.toString().toInt()
+        vModel.numberOfAccount=binding.editTextNumberOfAccount.text.toString().toInt()
 
         val pref = requireActivity().getSharedPreferences("share", Context.MODE_PRIVATE)
         val editor = pref.edit()
@@ -98,14 +102,14 @@ class ProfileFragment : Fragment() {
 
 
     private fun edit() {
-        Repository.editProfileInfoFlag=false
+        vModel.editProfileInfoFlag=false
         val pref = requireActivity().getSharedPreferences("share", Context.MODE_PRIVATE)
         binding.editTextFirstName.setText(pref.getString("firstName",""))
         binding.editTextLastName.setText(pref.getString("lastName",""))
         binding.editTextFatherName.setText(pref.getString("fatherName",""))
         binding.editTextPostCode.setText(pref.getString("postCode",""))
         binding.editTextPhone.setText(pref.getString("phone",""))
-        binding.editTextNumberOfAccount.setText(Repository.numberOfAccount.toString())
+        binding.editTextNumberOfAccount.setText(vModel.numberOfAccount.toString())
 
         register()
     }
