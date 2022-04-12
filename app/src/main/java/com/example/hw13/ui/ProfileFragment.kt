@@ -1,6 +1,6 @@
 package com.example.hw13.ui
 
-import ProfileViewModel
+import com.example.hw13.viewModels.ViewModel
 import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -8,15 +8,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.fragment.app.viewModels
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.example.hw13.R
 import com.example.hw13.databinding.FragmentProfileBinding
-import com.example.hw13.repository.Repository
 
 class ProfileFragment : Fragment() {
     private lateinit var  binding : FragmentProfileBinding
-    private val vModel: ProfileViewModel by viewModels()
+    private val vModel: ViewModel by activityViewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -85,7 +84,7 @@ class ProfileFragment : Fragment() {
         val fatherName=binding.editTextFatherName.text.toString()
         val postCode=binding.editTextPostCode.text.toString()
         val phone=binding.editTextPhone.text.toString()
-        vModel.numberOfAccount=binding.editTextNumberOfAccount.text.toString().toInt()
+        val numberOfAccount=binding.editTextNumberOfAccount.text.toString().toInt()
 
         val pref = requireActivity().getSharedPreferences("share", Context.MODE_PRIVATE)
         val editor = pref.edit()
@@ -94,6 +93,7 @@ class ProfileFragment : Fragment() {
         editor.putString("fatherName", fatherName)
         editor.putString("postCode", postCode)
         editor.putString("phone", phone)
+        editor.putInt("numberOfAccount", numberOfAccount)
         editor.apply()
         Toast.makeText(activity, "ذخیره اطلاعات انجام شد", Toast.LENGTH_LONG).show()
 
@@ -109,7 +109,7 @@ class ProfileFragment : Fragment() {
         binding.editTextFatherName.setText(pref.getString("fatherName",""))
         binding.editTextPostCode.setText(pref.getString("postCode",""))
         binding.editTextPhone.setText(pref.getString("phone",""))
-        binding.editTextNumberOfAccount.setText(vModel.numberOfAccount.toString())
+        binding.editTextNumberOfAccount.setText(pref.getInt("numberOfAccount",0).toString())
 
         register()
     }
