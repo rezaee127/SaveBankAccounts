@@ -1,10 +1,12 @@
 package com.example.hw13.ui
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import com.example.hw13.databinding.FragmentShowAccountsBinding
 import com.example.hw13.viewModels.AccountViewModel
@@ -35,19 +37,32 @@ class ShowAccountsFragment : Fragment() {
 
 
 
+    @SuppressLint("SetTextI18n")
     private fun initView() {
 
-        if(vModel.showAccount()){
-//            var x=0
-//            vModel.index.observe(requireActivity()){
-//                x=it
-//            }
+        for (i in 0 until vModel.getAllAccounts()?.size!!){
+            Toast.makeText(requireActivity(),"${vModel.getAllAccounts()?.get(i)?.balance}", Toast.LENGTH_SHORT).show()
+        }
 
-            vModel.accountLiveData?.observe(requireActivity()){
-                binding.textViewBalance.text=it.balance.toString()
-                binding.textViewCardNumber.text=it.cardNumber
-                binding.textViewTypeAccount.text=it.accountType.toString()
+
+        if(vModel.getAllAccounts()?.size!=0){
+
+            vModel.balanceLiveData.observe(requireActivity()){
+                binding.textViewBalance.text="موجودی : ${it.toString()}"
             }
+
+            vModel.cardNumberLiveData.observe(requireActivity()){
+                binding.textViewCardNumber.text="شماره کارت : $it"
+            }
+
+            vModel.accountType.observe(requireActivity()){
+                binding.textViewTypeAccount.text="نوع حساب : $it"
+            }
+//            vModel.accountLiveData?.observe(requireActivity()){
+//                binding.textViewBalance.text=it.balance.toString()
+//                binding.textViewCardNumber.text=it.cardNumber
+//                binding.textViewTypeAccount.text=it.accountType.toString()
+//            }
 
             vModel.nextEnabledLiveData.observe(requireActivity()){
                 binding.buttonNext.isEnabled=it
@@ -66,9 +81,7 @@ class ShowAccountsFragment : Fragment() {
 
 
         }else{
-            binding.textViewBalance.text="0"
-            binding.textViewCardNumber.text="0"
-            binding.textViewTypeAccount.text="0"
+            binding.textViewCardNumber.text="دیتابیس خالی است"
             binding.buttonNext.isEnabled=false
             binding.buttonBack.isEnabled=false
         }

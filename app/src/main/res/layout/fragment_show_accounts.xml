@@ -13,7 +13,6 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="48dp"
         android:gravity="center"
-        android:text="TextView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -24,7 +23,6 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="64dp"
         android:gravity="center"
-        android:text="TextView"
         app:layout_constraintEnd_toEndOf="@+id/textViewTypeAccount"
         app:layout_constraintStart_toStartOf="@+id/textViewTypeAccount"
         app:layout_constraintTop_toBottomOf="@+id/textViewTypeAccount" />
@@ -36,7 +34,6 @@
         android:layout_marginTop="64dp"
         android:layoutDirection="rtl"
         android:gravity="center"
-        android:text="TextView"
         app:layout_constraintEnd_toEndOf="@+id/textViewCardNumber"
         app:layout_constraintStart_toStartOf="@+id/textViewCardNumber"
         app:layout_constraintTop_toBottomOf="@+id/textViewCardNumber" />

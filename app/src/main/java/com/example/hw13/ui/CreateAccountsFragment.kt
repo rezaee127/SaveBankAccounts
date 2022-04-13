@@ -12,12 +12,13 @@ import com.example.hw13.databinding.FragmentCreateAccountsBinding
 import com.example.hw13.models.Account
 import com.example.hw13.models.AccountType
 import com.example.hw13.viewModels.AccountViewModel
+import com.example.hw13.viewModels.CreateAccountViewModel
 
 
 class CreateAccountsFragment : Fragment() {
 
     private lateinit var binding: FragmentCreateAccountsBinding
-    private val vModel: AccountViewModel by activityViewModels()
+    private val vModel: CreateAccountViewModel by activityViewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -85,23 +86,22 @@ class CreateAccountsFragment : Fragment() {
                         !regex.matches(listOfETBalance[i].text) -> listOfETBalance[i].error="یک عدد اعشاری برای موجودی وارد کنید"
 
                         else->{
-                            val type= when( listOfETTypeAccount[i].toString()){
+                            val type= when( listOfETTypeAccount[i].text.toString()){
                                 "1"-> AccountType.SavingsAccount
                                 "2"-> AccountType.ShortTerm
                                 else -> AccountType.LongTerm
                             }
 
-                            vModel.listOfAccounts.add(Account(i+1,type,
+                            vModel.listOfAccount.add(Account(0,type,
                                 listOfETCardNumber[i].text.toString(),
                                 listOfETBalance[i].text.toString().toDouble()))
                             flag=true
                         }
                     }
                 }
-                vModel.setList(vModel.listOfAccounts)
+                vModel.setList(vModel.listOfAccount)
                 if(flag){
                     Toast.makeText(requireActivity(),"ذخیره اطلاعات انجام شد",Toast.LENGTH_SHORT).show()
-                    Toast.makeText(requireActivity(),"${vModel.getAllAccounts()?.get(1)?.balance}",Toast.LENGTH_SHORT).show()
                 }
 
             }

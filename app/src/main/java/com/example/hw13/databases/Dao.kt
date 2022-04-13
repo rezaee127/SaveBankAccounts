@@ -17,11 +17,15 @@ interface AccountDao {
     @Query("SELECT accountType FROM Account where cardNumber=:cardNumber")
     fun getAccountTypeByCardNumber(cardNumber:String): AccountType
 
-//    @Query("SELECT * FROM Account where id=:id")
-//    fun getAccount(id:Int): MutableLiveData<Account>
+    @Query("SELECT * FROM Account where id=:id")
+    fun getAccountLiveData(id:Int): LiveData<Account>
 
     @Query("SELECT * FROM Account where id=:id")
-    fun getAccount(id:Int): LiveData<Account>
+    fun getAccount(id:Int): Account
+
+
+//    @Query("SELECT * FROM Account where id=:id")
+//    fun getAccount(id:Int): LiveData<Account>
 
     @Query("SELECT * FROM Account")
     fun getAll():List<Account>

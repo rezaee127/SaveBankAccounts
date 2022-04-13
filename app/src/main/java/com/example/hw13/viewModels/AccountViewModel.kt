@@ -4,6 +4,7 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Transformations
 import com.example.hw13.models.Account
 import com.example.hw13.models.AccountType
 import com.example.hw13.repository.Repository
@@ -12,22 +13,32 @@ open class AccountViewModel (App: Application): AndroidViewModel(App){
 
     var index=0
     var sizeList:Int=0
+    var listOfAccounts:List<Account>?=null
+    var cardNumberLiveData=MutableLiveData<String>()
+    var balanceLiveData=MutableLiveData<Double>()
     var accountTypeLiveData=MutableLiveData<AccountType>()
+    var accountType=Transformations.map(accountTypeLiveData){
+        when(it){
+            AccountType.SavingsAccount -> "پس انداز"
+            AccountType.LongTerm -> "بلند مدت"
+            else -> "کوتاه مدت"
+        }
+    }
+
     var nextEnabledLiveData=MutableLiveData(true)
     var backEnabledLiveData=MutableLiveData(false)
     var accountLiveData:LiveData<Account>?=null
 
-    var listOfAccounts=ArrayList<Account>()
+
     var listLiveData:LiveData<List<Account>>?=null
 
 
     init {
         Repository.initDB(App.applicationContext)
+        showAccount()
     }
 
-    fun setList(list:List<Account>){
-        Repository.setAllAccounts(list)
-    }
+
     fun getAllAccounts():List<Account>?{
         return Repository.getAllList()
     }
@@ -38,11 +49,13 @@ open class AccountViewModel (App: Application): AndroidViewModel(App){
 
 
     fun showAccount():Boolean{
-        if (!Repository.getAccount(0)?.value?.cardNumber.isNullOrBlank()){
-            listLiveData=Repository.getAllLiveData()
+        if (Repository.getAllList()?.size!=0){
+            listOfAccounts=Repository.getAllList()
             sizeList= Repository.getAllList()?.size!!
-            //accountTypeLiveData=listLiveData.value?.get(0)
-            accountLiveData=Repository.getAccount(0)
+            cardNumberLiveData.value= listOfAccounts?.get(0)?.cardNumber
+            balanceLiveData.value= listOfAccounts?.get(0)?.balance
+            accountTypeLiveData.value= listOfAccounts?.get(0)?.accountType
+            accountLiveData=Repository.getAccountLiveData(0)
             return true
         }else
             return false
@@ -63,7 +76,10 @@ open class AccountViewModel (App: Application): AndroidViewModel(App){
                 backEnabledLiveData.value = true
             }
         }
-        accountLiveData= Repository.getAccount(i)
+        accountLiveData= Repository.getAccountLiveData(i)
+        cardNumberLiveData.value= listOfAccounts?.get(i)?.cardNumber
+        balanceLiveData.value= listOfAccounts?.get(i)?.balance
+        accountTypeLiveData.value= listOfAccounts?.get(i)?.accountType
         //listLiveData?.value=listLiveData?.value[]
         //questionLiveData.value =Repository.questionList[i].question
     }

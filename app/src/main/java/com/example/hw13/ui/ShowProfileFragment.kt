@@ -1,5 +1,6 @@
 package com.example.hw13.ui
 
+import android.annotation.SuppressLint
 import com.example.hw13.viewModels.ProfileViewModel
 import android.content.Context
 import android.os.Bundle
@@ -38,13 +39,14 @@ class ShowProfileFragment : Fragment() {
 
     }
 
+    @SuppressLint("SetTextI18n")
     private fun initView() {
         val pref = requireActivity().getSharedPreferences("share", Context.MODE_PRIVATE)
-        binding.textViewFirstName.text = pref.getString("firstName","")
-        binding.textViewLastName.text = pref.getString("lastName","")
-        binding.textViewFatherName.text = pref.getString("fatherName","")
-        binding.textViewPostCode.text = pref.getString("postCode","")
-        binding.textViewPhone.text = pref.getString("phone","")
+        binding.textViewFirstName.text ="نام :  ${pref.getString("firstName","")}"
+        binding.textViewLastName.text ="نام خانوادگی : ${ pref.getString("lastName","")}"
+        binding.textViewFatherName.text ="نام پدر : ${ pref.getString("fatherName","")}"
+        binding.textViewPostCode.text ="کد پستی : ${pref.getString("postCode","")}"
+        binding.textViewPhone.text ="تلفن : ${pref.getString("phone","")}"
 
         binding.buttonEdit.setOnClickListener {
             vModel.editProfileInfoFlag=true
