@@ -10,5 +10,8 @@
         android:id="@+id/showAccountFragment"/>
     <item android:title="Select Account"
         android:id="@+id/selectAccountFragment"/>
-    <item android:title="delete all" />
+    <item
+        android:onClick="onNavigationItemSelected"
+        android:title="delete all"
+        android:id="@+id/delete"/>
 </menu>

@@ -33,8 +33,12 @@ object Repository {
         accountDao?.insertAll(list)
     }
 
+    fun delete(){
+        accountDao?.deleteAll()
+    }
 
-    fun getAll():List<Account>?{
+
+    fun getAllList():List<Account>?{
         return accountDao?.getAll()
     }
 
@@ -42,14 +46,17 @@ object Repository {
         return accountDao?.getAllLiveData()
     }
 
-    fun getBalance(cardNumber:Int):Double?{
+    fun getBalance(cardNumber:String):Double?{
         return accountDao?.getBalanceByCardNumber(cardNumber)
     }
 
-    fun getAccountType(cardNumber:Int):AccountType?{
+    fun getAccountType(cardNumber:String):AccountType?{
         return accountDao?.getAccountTypeByCardNumber(cardNumber)
     }
 
 
+    fun getAccount(id:Int):LiveData<Account>?{
+        return accountDao?.getAccount(id)
+    }
 
 }

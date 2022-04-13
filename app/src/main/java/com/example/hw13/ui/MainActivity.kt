@@ -1,5 +1,6 @@
 package com.example.hw13.ui
 
+import DeleteDialogFragment
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
@@ -49,8 +50,13 @@ class MainActivity : AppCompatActivity() {
 
     }
     fun onNavigationItemSelected( item: MenuItem){
-       // if (item.itemId==R.id.exit){
-            finishAffinity()
-       // }
+        if (item.itemId==R.id.delete){
+            showNoticeDialog()
+        }
+    }
+
+    fun showNoticeDialog() {
+        val dialog = DeleteDialogFragment()
+        dialog.show(supportFragmentManager, "NoticeDialogFragment")
     }
 }

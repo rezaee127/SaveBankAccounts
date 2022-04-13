@@ -63,6 +63,7 @@ class CreateAccountsFragment : Fragment() {
             binding.editTextBalance3, binding.editTextBalance4, binding.editTextBalance5
         )
 
+        var flag=false
         val regex = Regex("^\\d+\\.+\\d+\$")
         val pref = requireActivity().getSharedPreferences("share", Context.MODE_PRIVATE)
         val numberOfAccount = pref.getInt("numberOfAccount", 0)
@@ -70,7 +71,7 @@ class CreateAccountsFragment : Fragment() {
             for (i in numberOfAccount until listOfLinerLayout.size) {
                 listOfLinerLayout[i].visibility = View.GONE
             }
-            binding.button.setOnClickListener {
+            binding.btnRegister.setOnClickListener {
                 for (i in 0 until numberOfAccount) {
 
                     when{
@@ -98,12 +99,17 @@ class CreateAccountsFragment : Fragment() {
                     }
                 }
                 vModel.setList(vModel.listOfAccounts)
-                //Toast.makeText(requireActivity(),"${vModel.getAllAccounts()?.get(1)?.balance}",Toast.LENGTH_SHORT).show()
+                flag=true
+
             }
 
 
         }
 
+        if(flag){
+            Toast.makeText(requireActivity(),"ذخیره اطلاعات انجام شد",Toast.LENGTH_SHORT).show()
+            //Toast.makeText(requireActivity(),"${vModel.getAllAccounts()?.get(1)?.balance}",Toast.LENGTH_SHORT).show()
+        }
 
     }
 

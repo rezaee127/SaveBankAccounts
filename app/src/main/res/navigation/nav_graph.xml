@@ -18,7 +18,11 @@
         android:id="@+id/createAccountFragment"
         android:name="com.example.hw13.ui.CreateAccountsFragment"
         android:label="Create Account"
-        tools:layout="@layout/fragment_create_accounts" />
+        tools:layout="@layout/fragment_create_accounts" >
+        <action
+            android:id="@+id/action_createAccountFragment_to_showAccountFragment"
+            app:destination="@id/showAccountFragment" />
+    </fragment>
     <fragment
         android:id="@+id/selectAccountFragment"
         android:name="com.example.hw13.ui.SelectAccountFragment"

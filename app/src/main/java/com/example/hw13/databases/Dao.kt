@@ -10,11 +10,14 @@ import com.example.hw13.models.AccountType
 interface AccountDao {
 
     @Query("SELECT balance FROM Account where cardNumber=:cardNumber")
-    fun getBalanceByCardNumber(cardNumber:Int):Double
+    fun getBalanceByCardNumber(cardNumber:String):Double
 
 
     @Query("SELECT accountType FROM Account where cardNumber=:cardNumber")
-    fun getAccountTypeByCardNumber(cardNumber:Int): AccountType
+    fun getAccountTypeByCardNumber(cardNumber:String): AccountType
+
+    @Query("SELECT * FROM Account where id=:id")
+    fun getAccount(id:Int):LiveData<Account>
 
     @Query("SELECT * FROM Account")
     fun getAll():List<Account>
