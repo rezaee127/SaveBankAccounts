@@ -2,6 +2,7 @@
 package com.example.hw13.databases
 
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.room.*
 import com.example.hw13.models.Account
 import com.example.hw13.models.AccountType
@@ -16,8 +17,11 @@ interface AccountDao {
     @Query("SELECT accountType FROM Account where cardNumber=:cardNumber")
     fun getAccountTypeByCardNumber(cardNumber:String): AccountType
 
+//    @Query("SELECT * FROM Account where id=:id")
+//    fun getAccount(id:Int): MutableLiveData<Account>
+
     @Query("SELECT * FROM Account where id=:id")
-    fun getAccount(id:Int):LiveData<Account>
+    fun getAccount(id:Int): LiveData<Account>
 
     @Query("SELECT * FROM Account")
     fun getAll():List<Account>

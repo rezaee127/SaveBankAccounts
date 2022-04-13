@@ -1,5 +1,6 @@
 package com.example.hw13.ui
 
+import com.example.hw13.viewModels.ProfileViewModel
 import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -10,12 +11,11 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.example.hw13.R
 import com.example.hw13.databinding.FragmentShowProfileBinding
-import com.example.hw13.viewModels.ViewModel
 
 
 class ShowProfileFragment : Fragment() {
     private lateinit var  binding : FragmentShowProfileBinding
-    private val vModel: ViewModel by activityViewModels()
+    private val vModel: ProfileViewModel by activityViewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 

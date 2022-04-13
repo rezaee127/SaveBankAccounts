@@ -11,14 +11,13 @@ import androidx.fragment.app.activityViewModels
 import com.example.hw13.databinding.FragmentCreateAccountsBinding
 import com.example.hw13.models.Account
 import com.example.hw13.models.AccountType
-import com.example.hw13.viewModels.ViewModel
+import com.example.hw13.viewModels.AccountViewModel
 
 
 class CreateAccountsFragment : Fragment() {
 
     private lateinit var binding: FragmentCreateAccountsBinding
-    private val vModel: ViewModel by activityViewModels()
-
+    private val vModel: AccountViewModel by activityViewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -73,8 +72,9 @@ class CreateAccountsFragment : Fragment() {
             }
             binding.btnRegister.setOnClickListener {
                 for (i in 0 until numberOfAccount) {
-
+                    flag=false
                     when{
+
                         listOfETTypeAccount[i].text.isNullOrBlank()->listOfETTypeAccount[i].error="نوع حساب را وارد کنید"
                         listOfETTypeAccount[i].text.toString().toInt() !in 1..3 -> listOfETTypeAccount[i].error="نوع حساب اشتباه وارد شده است"
 
@@ -94,22 +94,22 @@ class CreateAccountsFragment : Fragment() {
                             vModel.listOfAccounts.add(Account(i+1,type,
                                 listOfETCardNumber[i].text.toString(),
                                 listOfETBalance[i].text.toString().toDouble()))
-
+                            flag=true
                         }
                     }
                 }
                 vModel.setList(vModel.listOfAccounts)
-                flag=true
+                if(flag){
+                    Toast.makeText(requireActivity(),"ذخیره اطلاعات انجام شد",Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requireActivity(),"${vModel.getAllAccounts()?.get(1)?.balance}",Toast.LENGTH_SHORT).show()
+                }
 
             }
 
 
         }
 
-        if(flag){
-            Toast.makeText(requireActivity(),"ذخیره اطلاعات انجام شد",Toast.LENGTH_SHORT).show()
-            //Toast.makeText(requireActivity(),"${vModel.getAllAccounts()?.get(1)?.balance}",Toast.LENGTH_SHORT).show()
-        }
+
 
     }
 

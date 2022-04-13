@@ -1,15 +1,17 @@
 package com.example.hw13.ui
 
+import com.example.hw13.viewModels.DialogViewModel
 import android.app.Dialog
 import android.content.DialogInterface
 import android.os.Bundle
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.activityViewModels
-import com.example.hw13.viewModels.ViewModel
+
+
 
 class DeleteDialogFragment : DialogFragment() {
-    private val vModel: ViewModel by activityViewModels()
+    private val vModel: DialogViewModel by activityViewModels()
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         return activity?.let {
             // Use the Builder class for convenient dialog construction
@@ -18,10 +20,11 @@ class DeleteDialogFragment : DialogFragment() {
                 .setPositiveButton("بله",
                     DialogInterface.OnClickListener { dialog, id ->
                         vModel.delete()
+                        dismiss()
                     })
                 .setNegativeButton("خیر",
                     DialogInterface.OnClickListener { dialog, id ->
-                        // User cancelled the dialog
+                        dismiss()
                     })
             // Create the AlertDialog object and return it
             builder.create()

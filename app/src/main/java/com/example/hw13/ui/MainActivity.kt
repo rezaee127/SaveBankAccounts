@@ -54,7 +54,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    fun showNoticeDialog() {
+    private fun showNoticeDialog() {
         val dialog = DeleteDialogFragment()
         dialog.show(supportFragmentManager, "NoticeDialogFragment")
     }

@@ -7,12 +7,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import com.example.hw13.databinding.FragmentShowAccountsBinding
-import com.example.hw13.viewModels.ViewModel
+import com.example.hw13.viewModels.AccountViewModel
 
 
 class ShowAccountsFragment : Fragment() {
     private lateinit var  binding : FragmentShowAccountsBinding
-    private val vModel: ViewModel by activityViewModels()
+    private val vModel: AccountViewModel by activityViewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
@@ -38,15 +38,15 @@ class ShowAccountsFragment : Fragment() {
     private fun initView() {
 
         if(vModel.showAccount()){
-            var x=0
-            vModel.index.observe(requireActivity()){
-                x=it
-            }
+//            var x=0
+//            vModel.index.observe(requireActivity()){
+//                x=it
+//            }
 
-            vModel.listLiveData?.observe(requireActivity()){
-                binding.textViewBalance.text=it[x].balance.toString()
-                binding.textViewCardNumber.text=it[x].cardNumber
-                binding.textViewTypeAccount.text=it[x].accountType.toString()
+            vModel.accountLiveData?.observe(requireActivity()){
+                binding.textViewBalance.text=it.balance.toString()
+                binding.textViewCardNumber.text=it.cardNumber
+                binding.textViewTypeAccount.text=it.accountType.toString()
             }
 
             vModel.nextEnabledLiveData.observe(requireActivity()){

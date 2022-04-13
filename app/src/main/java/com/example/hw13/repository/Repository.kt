@@ -4,6 +4,7 @@ package com.example.hw13.repository
 import com.example.hw13.databases.Database3
 import android.content.Context
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import com.example.hw13.databases.AccountDao
 import com.example.hw13.models.Account
 import com.example.hw13.models.AccountType
@@ -55,7 +56,7 @@ object Repository {
     }
 
 
-    fun getAccount(id:Int):LiveData<Account>?{
+    fun getAccount(id:Int): LiveData<Account>?{
         return accountDao?.getAccount(id)
     }
 

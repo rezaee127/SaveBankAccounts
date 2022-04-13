@@ -1,6 +1,6 @@
 package com.example.hw13.ui
 
-import com.example.hw13.viewModels.ViewModel
+import com.example.hw13.viewModels.ProfileViewModel
 import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -15,7 +15,7 @@ import com.example.hw13.databinding.FragmentProfileBinding
 
 class ProfileFragment : Fragment() {
     private lateinit var  binding : FragmentProfileBinding
-    private val vModel: ViewModel by activityViewModels()
+    private val vModel: ProfileViewModel by activityViewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
