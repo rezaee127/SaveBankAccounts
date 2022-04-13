@@ -6,7 +6,7 @@ import androidx.room.PrimaryKey
 
 @Entity
 data class Account(@PrimaryKey(autoGenerate = true)var id:Int,
-                   var accountType:AccountType, var cardNumber:Int, var Balance:Double)
+                   var accountType:AccountType, var cardNumber:String, var balance:Double)
 
 enum class AccountType{
     SavingsAccount , LongTerm , ShortTerm

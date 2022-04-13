@@ -4,4 +4,7 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="profile">Profile</string>
     <string name="number_of_account"> یک عدد از 1 تا 5 برای تعداد حساب ها وارد کنید</string>
+    <string name="Type"><size  >انتخاب نوع حساب : یک عدد از 1 تا 3 وارد کنید\n
+        1=پس انداز     \t       2=کوتاه مدت     \t          3=بلند مدت
+    </size></string>
 </resources>

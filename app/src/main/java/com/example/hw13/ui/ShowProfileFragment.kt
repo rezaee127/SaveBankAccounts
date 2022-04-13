@@ -10,7 +10,6 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.example.hw13.R
 import com.example.hw13.databinding.FragmentShowProfileBinding
-import com.example.hw13.repository.Repository
 import com.example.hw13.viewModels.ViewModel
 
 

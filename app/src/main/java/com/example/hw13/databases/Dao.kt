@@ -1,6 +1,7 @@
 
 package com.example.hw13.databases
 
+import androidx.lifecycle.LiveData
 import androidx.room.*
 import com.example.hw13.models.Account
 import com.example.hw13.models.AccountType
@@ -18,8 +19,16 @@ interface AccountDao {
     @Query("SELECT * FROM Account")
     fun getAll():List<Account>
 
+    @Query("SELECT * FROM Account")
+    fun getAllLiveData(): LiveData<List<Account>>
+
+
+//    @Insert(onConflict = OnConflictStrategy.REPLACE)
+//    fun insertAll(vararg account: Account)
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertAll(vararg account: Account)
+    fun insertAll(list:List<Account>)
+
 
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
