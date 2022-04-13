@@ -1,3 +1,5 @@
+package com.example.hw13.ui
+
 import android.app.Dialog
 import android.content.DialogInterface
 import android.os.Bundle
@@ -12,7 +14,7 @@ class DeleteDialogFragment : DialogFragment() {
         return activity?.let {
             // Use the Builder class for convenient dialog construction
             val builder = AlertDialog.Builder(it)
-            builder.setMessage("ایا مطمینی؟")
+            builder.setMessage("آیا میخواهید که همه اطلاعات دیتابیس حذف شود؟")
                 .setPositiveButton("بله",
                     DialogInterface.OnClickListener { dialog, id ->
                         vModel.delete()
