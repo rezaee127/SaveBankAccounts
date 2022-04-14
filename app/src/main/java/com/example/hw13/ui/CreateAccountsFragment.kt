@@ -1,5 +1,6 @@
 package com.example.hw13.ui
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -43,6 +44,7 @@ class CreateAccountsFragment : Fragment() {
 
     }
 
+    @SuppressLint("SetTextI18n")
     private fun initView() {
 
 //        val listOfLinerLayout = arrayOf(binding.linear1, binding.linear2, binding.linear3,
@@ -71,7 +73,7 @@ class CreateAccountsFragment : Fragment() {
                 binding.buttonNext.isEnabled=false
             binding.buttonNext.setOnClickListener {
                 x++
-                binding.textViewTitle.text="حساب ${x}"
+                binding.textViewTitle.text="حساب $x"
                 if (x==numberOfAccount)
                     binding.buttonNext.isEnabled=false
                 binding.editTextBalance.setText("")
@@ -106,9 +108,8 @@ class CreateAccountsFragment : Fragment() {
                         }
                     }
                 vModel.setList(vModel.listOfAccount)
+            }
 
         }
-
-    }
     }
 }
