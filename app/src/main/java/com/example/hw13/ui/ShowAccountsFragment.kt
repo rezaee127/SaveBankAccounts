@@ -40,9 +40,9 @@ class ShowAccountsFragment : Fragment() {
     @SuppressLint("SetTextI18n")
     private fun initView() {
 
-        for (i in 0 until vModel.getAllAccounts().size){
-            Toast.makeText(requireActivity(),"${vModel.getAllAccounts().get(i).balance}", Toast.LENGTH_SHORT).show()
-        }
+//        for (i in 0 until vModel.getAllAccounts().size){
+//            Toast.makeText(requireActivity(),"${vModel.getAllAccounts().get(i).balance}", Toast.LENGTH_SHORT).show()
+//        }
 
 
         if(vModel.getAllAccounts().size!=0){

@@ -62,12 +62,22 @@ class CreateAccountsFragment : Fragment() {
 //            binding.editTextBalance1, binding.editTextBalance2,
 //            binding.editTextBalance3, binding.editTextBalance4, binding.editTextBalance5
 //        )
-        var x=0
         val regex = Regex("^\\d+\\.+\\d+\$")
         val pref = requireActivity().getSharedPreferences("share", Context.MODE_PRIVATE)
         val numberOfAccount = pref.getInt("numberOfAccount", 0)
+        var x=1
         if (numberOfAccount != 0) {
-            for (i in 0 until numberOfAccount) {
+            if (x==numberOfAccount)
+                binding.buttonNext.isEnabled=false
+            binding.buttonNext.setOnClickListener {
+                x++
+                binding.textViewTitle.text="حساب ${x}"
+                if (x==numberOfAccount)
+                    binding.buttonNext.isEnabled=false
+                binding.editTextBalance.setText("")
+                binding.editTextCardNumber.setText("")
+                binding.editTextTypeAccount.setText("")
+            }
             binding.btnRegister.setOnClickListener {
 
                     when{
@@ -90,20 +100,15 @@ class CreateAccountsFragment : Fragment() {
                             vModel.listOfAccount.add(Account(0,type,
                                 binding.editTextCardNumber.text.toString(),
                                 binding.editTextBalance.text.toString().toDouble()))
+                            if(!binding.buttonNext.isEnabled)
+                                binding.btnRegister.isEnabled=false
                             Toast.makeText(requireActivity(),"ذخیره اطلاعات انجام شد",Toast.LENGTH_SHORT).show()
-
-                            binding.editTextBalance.setText("")
-                            binding.editTextCardNumber.setText("")
-                            binding.editTextTypeAccount.setText("")
-
                         }
                     }
-                }
                 vModel.setList(vModel.listOfAccount)
-                x=i
-            }
-            if (x== numberOfAccount-1)
-                binding.btnRegister.isEnabled=false
+
         }
+
+    }
     }
 }
