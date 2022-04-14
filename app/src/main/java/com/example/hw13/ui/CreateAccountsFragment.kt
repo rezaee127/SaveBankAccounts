@@ -45,73 +45,65 @@ class CreateAccountsFragment : Fragment() {
 
     private fun initView() {
 
-        val listOfLinerLayout = arrayOf(binding.linear1, binding.linear2, binding.linear3,
-            binding.linear4, binding.linear5
-        )
-
-        val listOfETTypeAccount= arrayOf(binding.editTextTypeAccount1,
-            binding.editTextTypeAccount2,binding.editTextTypeAccount3,
-            binding.editTextTypeAccount4,binding.editTextTypeAccount5
-        )
-
-        val listOfETCardNumber = arrayOf(
-            binding.editTextCardNumber1, binding.editTextCardNumber2,
-            binding.editTextCardNumber3, binding.editTextCardNumber4, binding.editTextCardNumber5
-        )
-        val listOfETBalance = arrayOf(
-            binding.editTextBalance1, binding.editTextBalance2,
-            binding.editTextBalance3, binding.editTextBalance4, binding.editTextBalance5
-        )
-
-        var flag=false
+//        val listOfLinerLayout = arrayOf(binding.linear1, binding.linear2, binding.linear3,
+//            binding.linear4, binding.linear5
+//        )
+//
+//        val listOfETTypeAccount= arrayOf(binding.editTextTypeAccount1,
+//            binding.editTextTypeAccount2,binding.editTextTypeAccount3,
+//            binding.editTextTypeAccount4,binding.editTextTypeAccount5
+//        )
+//
+//        val listOfETCardNumber = arrayOf(
+//            binding.editTextCardNumber1, binding.editTextCardNumber2,
+//            binding.editTextCardNumber3, binding.editTextCardNumber4, binding.editTextCardNumber5
+//        )
+//        val listOfETBalance = arrayOf(
+//            binding.editTextBalance1, binding.editTextBalance2,
+//            binding.editTextBalance3, binding.editTextBalance4, binding.editTextBalance5
+//        )
+        var x=0
         val regex = Regex("^\\d+\\.+\\d+\$")
         val pref = requireActivity().getSharedPreferences("share", Context.MODE_PRIVATE)
         val numberOfAccount = pref.getInt("numberOfAccount", 0)
         if (numberOfAccount != 0) {
-            for (i in numberOfAccount until listOfLinerLayout.size) {
-                listOfLinerLayout[i].visibility = View.GONE
-            }
+            for (i in 0 until numberOfAccount) {
             binding.btnRegister.setOnClickListener {
-                for (i in 0 until numberOfAccount) {
-                    flag=false
+
                     when{
+                        binding.editTextTypeAccount.text.isNullOrBlank()->binding.editTextTypeAccount.error="نوع حساب را وارد کنید"
+                        binding.editTextTypeAccount.text.toString().toInt() !in 1..3 -> binding.editTextTypeAccount.error="نوع حساب اشتباه وارد شده است"
 
-                        listOfETTypeAccount[i].text.isNullOrBlank()->listOfETTypeAccount[i].error="نوع حساب را وارد کنید"
-                        listOfETTypeAccount[i].text.toString().toInt() !in 1..3 -> listOfETTypeAccount[i].error="نوع حساب اشتباه وارد شده است"
+                        binding.editTextCardNumber.text.isNullOrBlank()->binding.editTextCardNumber.error="شماره کارت را وارد کنید"
+                        binding.editTextCardNumber.length()!=16 -> binding.editTextCardNumber.error="شماره کارت اشتباه است"
 
-                        listOfETCardNumber[i].text.isNullOrBlank()->listOfETCardNumber[i].error="شماره کارت را وارد کنید"
-                        listOfETCardNumber[i].length()!=16 -> listOfETCardNumber[i].error="شماره کارت اشتباه است"
-
-                        listOfETBalance[i].text.isNullOrBlank()->listOfETBalance[i].error="موجودی را وارد کنید"
-                        !regex.matches(listOfETBalance[i].text) -> listOfETBalance[i].error="یک عدد اعشاری برای موجودی وارد کنید"
+                        binding.editTextBalance.text.isNullOrBlank()->binding.editTextBalance.error="موجودی را وارد کنید"
+                        !regex.matches(binding.editTextBalance.text) -> binding.editTextBalance.error="یک عدد اعشاری برای موجودی وارد کنید"
 
                         else->{
-                            val type= when( listOfETTypeAccount[i].text.toString()){
+                            val type= when( binding.editTextTypeAccount.text.toString()){
                                 "1"-> AccountType.SavingsAccount
                                 "2"-> AccountType.ShortTerm
                                 else -> AccountType.LongTerm
                             }
 
                             vModel.listOfAccount.add(Account(0,type,
-                                listOfETCardNumber[i].text.toString(),
-                                listOfETBalance[i].text.toString().toDouble()))
-                            flag=true
+                                binding.editTextCardNumber.text.toString(),
+                                binding.editTextBalance.text.toString().toDouble()))
+                            Toast.makeText(requireActivity(),"ذخیره اطلاعات انجام شد",Toast.LENGTH_SHORT).show()
+
+                            binding.editTextBalance.setText("")
+                            binding.editTextCardNumber.setText("")
+                            binding.editTextTypeAccount.setText("")
+
                         }
                     }
                 }
                 vModel.setList(vModel.listOfAccount)
-                if(flag){
-                    Toast.makeText(requireActivity(),"ذخیره اطلاعات انجام شد",Toast.LENGTH_SHORT).show()
-                }
-
+                x=i
             }
-
-
+            if (x== numberOfAccount-1)
+                binding.btnRegister.isEnabled=false
         }
-
-
-
     }
-
-
 }
