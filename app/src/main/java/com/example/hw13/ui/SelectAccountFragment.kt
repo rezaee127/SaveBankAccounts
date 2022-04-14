@@ -37,12 +37,12 @@ class SelectAccountFragment : Fragment() {
     @SuppressLint("SetTextI18n")
     private fun initView() {
 
-        if(vModel.getAllAccounts()?.size!=0) {
+        if(vModel.getAllAccounts().size!=0) {
             binding.button.setOnClickListener {
                 if (binding.editTextCardNumber.length() != 16)
                     binding.editTextCardNumber.error = "شماره کارت اشتباه است"
                 else if (vModel.getCardNumber(binding.editTextCardNumber.text.toString())){
-                    var cardNumber=binding.editTextCardNumber.text.toString()
+                    val cardNumber=binding.editTextCardNumber.text.toString()
                     binding.textViewTypeAccount.text="نوع حساب : ${vModel.getAccountType(cardNumber).toString()}"
                     binding.textViewBalance.text="موجودی : ${vModel.getBalance(cardNumber).toString()}"
 

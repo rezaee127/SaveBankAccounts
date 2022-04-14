@@ -12,15 +12,15 @@ class SelectAccountViewModel (App: Application): AndroidViewModel(App){
         Repository.initDB(App.applicationContext)
     }
 
-    fun getAllAccounts():List<Account>?{
+    fun getAllAccounts():List<Account>{
         return Repository.getAllList()
     }
 
     fun getCardNumber(card:String):Boolean{
         var flag=false
-        var size=Repository.getAllList()!!.size
+        var size=Repository.getAllList().size
         for (i in 0 until size){
-            if(card== Repository.getAllList()!![i].cardNumber){
+            if(card== Repository.getAllList()[i].cardNumber){
                flag= true
                break
             }else
@@ -30,11 +30,11 @@ class SelectAccountViewModel (App: Application): AndroidViewModel(App){
     }
 
     fun getBalance(card:String):Double{
-        return Repository.getBalance(card)!!
+        return Repository.getBalance(card)
     }
 
     fun getAccountType(card:String):AccountType{
-        return Repository.getAccountType(card)!!
+        return Repository.getAccountType(card)
     }
 
 
