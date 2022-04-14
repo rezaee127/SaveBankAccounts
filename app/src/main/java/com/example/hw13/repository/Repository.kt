@@ -40,7 +40,7 @@ object Repository {
 
 
     fun getAllList():List<Account>{
-        listOfAccount=accountDao?.getAll()
+        listOfAccount=accountDao.getAll()
         return accountDao.getAll()
     }
 
@@ -48,13 +48,26 @@ object Repository {
         return accountDao.getAllLiveData()
     }
 
-    fun getBalance(cardNumber:String):Double{
+    fun getBalanceByCardNumber(cardNumber:String):Double{
         return accountDao.getBalanceByCardNumber(cardNumber)
     }
 
-    fun getAccountType(cardNumber:String):AccountType{
+    fun getAccountTypeByCardNumber(cardNumber:String):AccountType{
         return accountDao.getAccountTypeByCardNumber(cardNumber)
     }
+
+    fun getBalanceByCardNumberLiveData(cardNumber:String):LiveData<Double>{
+        return accountDao.getBalanceByCardNumberLiveData(cardNumber)
+    }
+
+    fun getAccountTypeByCardNumberLiveData(cardNumber:String):LiveData<AccountType>{
+        return accountDao.getAccountTypeByCardNumberLiveData(cardNumber)
+    }
+
+    fun getAccountByCardNumber(cardNumber:String):LiveData<Account>{
+        return accountDao.getAccountByCardNumber(cardNumber)
+    }
+
 
 
     fun getAccount(id:Int):Account{

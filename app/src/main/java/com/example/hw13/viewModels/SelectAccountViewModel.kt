@@ -2,11 +2,16 @@ package com.example.hw13.viewModels
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.Transformations
 import com.example.hw13.models.Account
 import com.example.hw13.models.AccountType
 import com.example.hw13.repository.Repository
 
 class SelectAccountViewModel (App: Application): AndroidViewModel(App){
+
+    lateinit var accountLiveData: LiveData<Account>
+    lateinit var accountType: LiveData<AccountType>
 
     init {
         Repository.initDB(App.applicationContext)
@@ -29,12 +34,27 @@ class SelectAccountViewModel (App: Application): AndroidViewModel(App){
         return flag
     }
 
-    fun getBalance(card:String):Double{
-        return Repository.getBalance(card)
+    fun getAccountByCardNumber(card: String):LiveData<Account>{
+        return Repository.getAccountByCardNumber(card)
     }
 
-    fun getAccountType(card:String):AccountType{
-        return Repository.getAccountType(card)
+
+    fun getBalanceByCardNumber(card:String):Double{
+        return Repository.getBalanceByCardNumber(card)
+    }
+
+    fun getAccountTypeByCardNumber(card:String):AccountType{
+        return Repository.getAccountTypeByCardNumber(card)
+    }
+
+
+
+//    fun getBalanceByCardNumberLiveData(card:String): LiveData<Double> {
+//        return Repository.getBalanceByCardNumberLiveData(card)
+//    }
+
+    fun getAccountTypeByCardNumberLiveData(card:String):LiveData<AccountType>{
+        return Repository.getAccountTypeByCardNumberLiveData(card)
     }
 
 

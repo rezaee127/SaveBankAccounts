@@ -35,6 +35,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="56dp"
         android:ems="10"
+        android:gravity="center"
         android:hint="شماره کارت را وارد کنید"
         android:inputType="number"
         app:layout_constraintEnd_toEndOf="@+id/textViewBalance"
