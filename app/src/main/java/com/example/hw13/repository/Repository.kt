@@ -17,52 +17,52 @@ object Repository {
 
 
     var db: Database3?=null
-    var accountDao: AccountDao?=null
+    lateinit var accountDao: AccountDao
 
 
     fun initDB(context: Context){
         db= Database3.getMyDataBase(context)
-        accountDao=db?.accountDao()
+        accountDao=db?.accountDao()!!
 
     }
 
     fun setAccount(account: Account){
-        accountDao?.insertAccount(account)
+        accountDao.insertAccount(account)
     }
 
     fun setAllAccounts(list:List<Account>){
-        accountDao?.insertAll(list)
+        accountDao.insertAll(list)
     }
 
     fun delete(){
-        accountDao?.deleteAll()
+        accountDao.deleteAll()
     }
 
 
-    fun getAllList():List<Account>?{
+    fun getAllList():List<Account>{
         listOfAccount=accountDao?.getAll()
-        return accountDao?.getAll()
+        return accountDao.getAll()
     }
 
-    fun getAllLiveData(): LiveData<List<Account>>?{
-        return accountDao?.getAllLiveData()
+    fun getAllLiveData(): LiveData<List<Account>>{
+        return accountDao.getAllLiveData()
     }
 
-    fun getBalance(cardNumber:String):Double?{
-        return accountDao?.getBalanceByCardNumber(cardNumber)
+    fun getBalance(cardNumber:String):Double{
+        return accountDao.getBalanceByCardNumber(cardNumber)
     }
 
-    fun getAccountType(cardNumber:String):AccountType?{
-        return accountDao?.getAccountTypeByCardNumber(cardNumber)
+    fun getAccountType(cardNumber:String):AccountType{
+        return accountDao.getAccountTypeByCardNumber(cardNumber)
     }
 
 
-    fun getAccount(id:Int):Account?{
-        return accountDao?.getAccount(id)
+    fun getAccount(id:Int):Account{
+        return accountDao.getAccount(id)
     }
 
-    fun getAccountLiveData(id:Int):LiveData<Account>?{
-        return accountDao?.getAccountLiveData(id)
+    fun getAccountLiveData(id:Int):LiveData<Account>{
+        return accountDao.getAccountLiveData(id)
     }
 
 }

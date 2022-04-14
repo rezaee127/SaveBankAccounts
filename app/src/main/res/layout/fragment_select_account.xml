@@ -1,14 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.SelectAccountFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
 
-</FrameLayout>
+    <TextView
+        android:id="@+id/textViewTypeAccount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="48dp"
+        android:gravity="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <TextView
+        android:id="@+id/textViewBalance"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="64dp"
+        android:layoutDirection="rtl"
+        android:gravity="center"
+        app:layout_constraintEnd_toEndOf="@+id/textViewTypeAccount"
+        app:layout_constraintStart_toStartOf="@+id/textViewTypeAccount"
+        app:layout_constraintTop_toBottomOf="@+id/textViewTypeAccount" />
+
+    <EditText
+        android:id="@+id/editTextCardNumber"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="56dp"
+        android:ems="10"
+        android:hint="شماره کارت را وارد کنید"
+        android:inputType="number"
+        app:layout_constraintEnd_toEndOf="@+id/textViewBalance"
+        app:layout_constraintStart_toStartOf="@+id/textViewBalance"
+        app:layout_constraintTop_toBottomOf="@+id/textViewBalance" />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="نمایش اطلاعات"
+        app:layout_constraintEnd_toEndOf="@+id/editTextCardNumber"
+        app:layout_constraintStart_toStartOf="@+id/editTextCardNumber"
+        app:layout_constraintTop_toBottomOf="@+id/editTextCardNumber" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -12,8 +12,8 @@ import com.example.hw13.repository.Repository
 open class AccountViewModel (App: Application): AndroidViewModel(App){
 
     var index=0
-    var sizeList:Int=0
-    var listOfAccounts:List<Account>?=null
+    var sizeList=0
+    lateinit var listOfAccounts:List<Account>
     var cardNumberLiveData=MutableLiveData<String>()
     var balanceLiveData=MutableLiveData<Double>()
     var accountTypeLiveData=MutableLiveData<AccountType>()
@@ -27,11 +27,8 @@ open class AccountViewModel (App: Application): AndroidViewModel(App){
 
     var nextEnabledLiveData=MutableLiveData(true)
     var backEnabledLiveData=MutableLiveData(false)
-    var accountLiveData:LiveData<Account>?=null
-
-
-    var listLiveData:LiveData<List<Account>>?=null
-
+    lateinit var accountLiveData:LiveData<Account>
+    lateinit var listLiveData:LiveData<List<Account>>
 
     init {
         Repository.initDB(App.applicationContext)
@@ -39,22 +36,37 @@ open class AccountViewModel (App: Application): AndroidViewModel(App){
     }
 
 
-    fun getAllAccounts():List<Account>?{
+    fun getAllAccounts():List<Account>{
         return Repository.getAllList()
     }
 
-    fun getAllLiveData():LiveData<List<Account>>?{
+    fun getAllLiveData():LiveData<List<Account>>{
         return Repository.getAllLiveData()
     }
 
 
+//
+//    fun showAccount():Boolean{
+//        if (Repository.getAllList()?.size!=0){
+//            listLiveData=Repository.getAllLiveData()
+//            sizeList= Repository.getAllLiveData()?.value?.size!!
+//            cardNumberLiveData.value= listLiveData?.value?.get(0)?.cardNumber
+//            balanceLiveData.value= listLiveData?.value?.get(0)?.balance
+//            accountTypeLiveData.value= listLiveData?.value?.get(0)?.accountType
+//            accountLiveData=Repository.getAccountLiveData(0)
+//            return true
+//        }else
+//            return false
+//    }
+
+
     fun showAccount():Boolean{
-        if (Repository.getAllList()?.size!=0){
-            listOfAccounts=Repository.getAllList()
-            sizeList= Repository.getAllList()?.size!!
-            cardNumberLiveData.value= listOfAccounts?.get(0)?.cardNumber
-            balanceLiveData.value= listOfAccounts?.get(0)?.balance
-            accountTypeLiveData.value= listOfAccounts?.get(0)?.accountType
+        if (getAllAccounts().size!=0){
+            listOfAccounts=getAllAccounts()
+            sizeList= getAllAccounts().size
+            cardNumberLiveData.value= listOfAccounts.get(0).cardNumber
+            balanceLiveData.value= listOfAccounts.get(0).balance
+            accountTypeLiveData.value= listOfAccounts.get(0).accountType
             accountLiveData=Repository.getAccountLiveData(0)
             return true
         }else
@@ -76,10 +88,18 @@ open class AccountViewModel (App: Application): AndroidViewModel(App){
                 backEnabledLiveData.value = true
             }
         }
+
         accountLiveData= Repository.getAccountLiveData(i)
-        cardNumberLiveData.value= listOfAccounts?.get(i)?.cardNumber
-        balanceLiveData.value= listOfAccounts?.get(i)?.balance
-        accountTypeLiveData.value= listOfAccounts?.get(i)?.accountType
+
+        cardNumberLiveData.value= listOfAccounts.get(i).cardNumber
+        balanceLiveData.value= listOfAccounts.get(i).balance
+        accountTypeLiveData.value= listOfAccounts.get(i).accountType
+
+
+//        cardNumberLiveData.value= listLiveData?.value?.get(i)?.cardNumber
+//        balanceLiveData.value= listLiveData?.value?.get(i)?.balance
+//        accountTypeLiveData.value= listLiveData?.value?.get(i)?.accountType
+
         //listLiveData?.value=listLiveData?.value[]
         //questionLiveData.value =Repository.questionList[i].question
     }
@@ -87,6 +107,10 @@ open class AccountViewModel (App: Application): AndroidViewModel(App){
 
     fun nextClicked() {
         index++
+        if (sizeList==1){
+            //nextEnabledLiveData.value = false
+            return
+        }
         setQuestion(index)
 
     }
@@ -94,11 +118,6 @@ open class AccountViewModel (App: Application): AndroidViewModel(App){
     fun backClicked() {
         index--
         setQuestion(index)
-
-//        index.value = index.value?.minus(1)
-//        index.value?.let {
-//            setQuestion(it)
-//        }
     }
 
 }

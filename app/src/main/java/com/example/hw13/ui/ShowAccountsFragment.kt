@@ -40,12 +40,12 @@ class ShowAccountsFragment : Fragment() {
     @SuppressLint("SetTextI18n")
     private fun initView() {
 
-        for (i in 0 until vModel.getAllAccounts()?.size!!){
-            Toast.makeText(requireActivity(),"${vModel.getAllAccounts()?.get(i)?.balance}", Toast.LENGTH_SHORT).show()
+        for (i in 0 until vModel.getAllAccounts().size){
+            Toast.makeText(requireActivity(),"${vModel.getAllAccounts().get(i).balance}", Toast.LENGTH_SHORT).show()
         }
 
 
-        if(vModel.getAllAccounts()?.size!=0){
+        if(vModel.getAllAccounts().size!=0){
 
             vModel.balanceLiveData.observe(requireActivity()){
                 binding.textViewBalance.text="موجودی : ${it.toString()}"
@@ -58,11 +58,15 @@ class ShowAccountsFragment : Fragment() {
             vModel.accountType.observe(requireActivity()){
                 binding.textViewTypeAccount.text="نوع حساب : $it"
             }
-//            vModel.accountLiveData?.observe(requireActivity()){
-//                binding.textViewBalance.text=it.balance.toString()
-//                binding.textViewCardNumber.text=it.cardNumber
-//                binding.textViewTypeAccount.text=it.accountType.toString()
-//            }
+
+
+        /*    vModel.accountLiveData?.observe(requireActivity()){
+                binding.textViewBalance.text=it.balance.toString()
+                binding.textViewCardNumber.text=it.cardNumber
+                binding.textViewTypeAccount.text=it.accountType.toString()
+            }
+
+         */
 
             vModel.nextEnabledLiveData.observe(requireActivity()){
                 binding.buttonNext.isEnabled=it
