@@ -47,23 +47,7 @@ class CreateAccountsFragment : Fragment() {
     @SuppressLint("SetTextI18n")
     private fun initView() {
 
-//        val listOfLinerLayout = arrayOf(binding.linear1, binding.linear2, binding.linear3,
-//            binding.linear4, binding.linear5
-//        )
-//
-//        val listOfETTypeAccount= arrayOf(binding.editTextTypeAccount1,
-//            binding.editTextTypeAccount2,binding.editTextTypeAccount3,
-//            binding.editTextTypeAccount4,binding.editTextTypeAccount5
-//        )
-//
-//        val listOfETCardNumber = arrayOf(
-//            binding.editTextCardNumber1, binding.editTextCardNumber2,
-//            binding.editTextCardNumber3, binding.editTextCardNumber4, binding.editTextCardNumber5
-//        )
-//        val listOfETBalance = arrayOf(
-//            binding.editTextBalance1, binding.editTextBalance2,
-//            binding.editTextBalance3, binding.editTextBalance4, binding.editTextBalance5
-//        )
+
         val regex = Regex("^\\d+\\.+\\d+\$")
         val pref = requireActivity().getSharedPreferences("share", Context.MODE_PRIVATE)
         val numberOfAccount = pref.getInt("numberOfAccount", 0)
