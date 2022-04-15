@@ -62,6 +62,8 @@ class CreateAccountsFragment : Fragment() {
                 binding.editTextCardNumber.setText("")
                 binding.editTextTypeAccount.setText("")
             }
+
+
             binding.btnRegister.setOnClickListener {
 
                     when{
@@ -84,12 +86,15 @@ class CreateAccountsFragment : Fragment() {
                             vModel.listOfAccount.add(Account(0,type,
                                 binding.editTextCardNumber.text.toString(),
                                 binding.editTextBalance.text.toString().toDouble()))
-                            if(!binding.buttonNext.isEnabled)
+                            if(!binding.buttonNext.isEnabled){
                                 binding.btnRegister.isEnabled=false
-                            Toast.makeText(requireActivity(),"ذخیره اطلاعات انجام شد",Toast.LENGTH_SHORT).show()
+                                vModel.setList(vModel.listOfAccount)
+                                Toast.makeText(requireActivity(),"ذخیره اطلاعات انجام شد",Toast.LENGTH_SHORT).show()
+                            }else
+                                Toast.makeText(requireActivity(),"برای وارد کردن حساب بعدی دکمه حساب بعدی رو بزن",Toast.LENGTH_LONG).show()
+
                         }
                     }
-                vModel.setList(vModel.listOfAccount)
             }
 
         }else{
