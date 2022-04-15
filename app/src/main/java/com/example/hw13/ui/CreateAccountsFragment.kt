@@ -40,8 +40,6 @@ class CreateAccountsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         initView()
-
-
     }
 
     @SuppressLint("SetTextI18n")
@@ -94,6 +92,11 @@ class CreateAccountsFragment : Fragment() {
                 vModel.setList(vModel.listOfAccount)
             }
 
+        }else{
+            Toast.makeText(requireActivity(),"تعداد حسابها را در صفحه پروفایل وارد کنید",Toast.LENGTH_SHORT).show()
+            binding.btnRegister.isEnabled=false
+            binding.buttonNext.isEnabled=false
         }
+
     }
 }
