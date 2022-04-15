@@ -38,25 +38,27 @@
         app:layout_constraintStart_toStartOf="@+id/textViewCardNumber"
         app:layout_constraintTop_toBottomOf="@+id/textViewCardNumber" />
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/buttonNext"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="68dp"
         android:layout_marginEnd="20dp"
         android:text="Next"
+        app:cornerRadius="30dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/buttonBack"
         app:layout_constraintTop_toBottomOf="@+id/textViewBalance" />
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/buttonBack"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="76dp"
         android:layout_marginStart="20dp"
         android:text="Back"
+        app:cornerRadius="30dp"
         app:layout_constraintBottom_toBottomOf="@+id/buttonNext"
         app:layout_constraintEnd_toStartOf="@+id/buttonNext"
         app:layout_constraintHorizontal_bias="0.5"
