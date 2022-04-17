@@ -46,6 +46,7 @@ class CreateAccountsFragment : Fragment() {
 
 
         val regex = Regex("^\\d+\\.+\\d+\$")
+        val regex1 =   Regex("^[1234567809.]+$")
         val pref = requireActivity().getSharedPreferences("share", Context.MODE_PRIVATE)
         val numberOfAccount = pref.getInt("numberOfAccount", 0)
         var x=1
@@ -74,6 +75,7 @@ class CreateAccountsFragment : Fragment() {
 
                         binding.editTextBalance.text.isNullOrBlank()->binding.editTextBalance.error="موجودی را وارد کنید"
                         !regex.matches(binding.editTextBalance.text) -> binding.editTextBalance.error="یک عدد اعشاری برای موجودی وارد کنید"
+                        !regex1.matches(binding.editTextBalance.text) -> binding.editTextBalance.error="اعداد فارسی وارد نکنید"
 
                         else->{
                             val type= when( binding.editTextTypeAccount.text.toString()){

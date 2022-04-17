@@ -13,7 +13,6 @@ import com.example.hw13.models.AccountType
 object Repository {
 
     var editProfileInfoFlag=false
-    var listOfAccount:List<Account>?=null
 
 
     var db: Database3?=null
@@ -40,7 +39,6 @@ object Repository {
 
 
     fun getAllList():List<Account>{
-        listOfAccount=accountDao.getAll()
         return accountDao.getAll()
     }
 
